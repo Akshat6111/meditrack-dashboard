@@ -9,38 +9,181 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as RegisterRouteImport } from './routes/register'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AppRouteImport } from './routes/_app'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppSettingsRouteImport } from './routes/_app.settings'
+import { Route as AppScheduleRouteImport } from './routes/_app.schedule'
+import { Route as AppProfileRouteImport } from './routes/_app.profile'
+import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
+import { Route as AppMedicationsRouteImport } from './routes/_app.medications'
+import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppAdherenceLogRouteImport } from './routes/_app.adherence-log'
 
+const RegisterRoute = RegisterRouteImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppScheduleRoute = AppScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNotificationsRoute = AppNotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMedicationsRoute = AppMedicationsRouteImport.update({
+  id: '/medications',
+  path: '/medications',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppDashboardRoute = AppDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdherenceLogRoute = AppAdherenceLogRouteImport.update({
+  id: '/adherence-log',
+  path: '/adherence-log',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/adherence-log': typeof AppAdherenceLogRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/medications': typeof AppMedicationsRoute
+  '/notifications': typeof AppNotificationsRoute
+  '/profile': typeof AppProfileRoute
+  '/schedule': typeof AppScheduleRoute
+  '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/adherence-log': typeof AppAdherenceLogRoute
+  '/dashboard': typeof AppDashboardRoute
+  '/medications': typeof AppMedicationsRoute
+  '/notifications': typeof AppNotificationsRoute
+  '/profile': typeof AppProfileRoute
+  '/schedule': typeof AppScheduleRoute
+  '/settings': typeof AppSettingsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/register': typeof RegisterRoute
+  '/_app/adherence-log': typeof AppAdherenceLogRoute
+  '/_app/dashboard': typeof AppDashboardRoute
+  '/_app/medications': typeof AppMedicationsRoute
+  '/_app/notifications': typeof AppNotificationsRoute
+  '/_app/profile': typeof AppProfileRoute
+  '/_app/schedule': typeof AppScheduleRoute
+  '/_app/settings': typeof AppSettingsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/adherence-log'
+    | '/dashboard'
+    | '/medications'
+    | '/notifications'
+    | '/profile'
+    | '/schedule'
+    | '/settings'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/login'
+    | '/register'
+    | '/adherence-log'
+    | '/dashboard'
+    | '/medications'
+    | '/notifications'
+    | '/profile'
+    | '/schedule'
+    | '/settings'
+  id:
+    | '__root__'
+    | '/'
+    | '/_app'
+    | '/login'
+    | '/register'
+    | '/_app/adherence-log'
+    | '/_app/dashboard'
+    | '/_app/medications'
+    | '/_app/notifications'
+    | '/_app/profile'
+    | '/_app/schedule'
+    | '/_app/settings'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  RegisterRoute: typeof RegisterRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/register': {
+      id: '/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof RegisterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +191,85 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/schedule': {
+      id: '/_app/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof AppScheduleRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/profile': {
+      id: '/_app/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/notifications': {
+      id: '/_app/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof AppNotificationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/medications': {
+      id: '/_app/medications'
+      path: '/medications'
+      fullPath: '/medications'
+      preLoaderRoute: typeof AppMedicationsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/dashboard': {
+      id: '/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AppDashboardRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/_app/adherence-log': {
+      id: '/_app/adherence-log'
+      path: '/adherence-log'
+      fullPath: '/adherence-log'
+      preLoaderRoute: typeof AppAdherenceLogRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
+interface AppRouteChildren {
+  AppAdherenceLogRoute: typeof AppAdherenceLogRoute
+  AppDashboardRoute: typeof AppDashboardRoute
+  AppMedicationsRoute: typeof AppMedicationsRoute
+  AppNotificationsRoute: typeof AppNotificationsRoute
+  AppProfileRoute: typeof AppProfileRoute
+  AppScheduleRoute: typeof AppScheduleRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAdherenceLogRoute: AppAdherenceLogRoute,
+  AppDashboardRoute: AppDashboardRoute,
+  AppMedicationsRoute: AppMedicationsRoute,
+  AppNotificationsRoute: AppNotificationsRoute,
+  AppProfileRoute: AppProfileRoute,
+  AppScheduleRoute: AppScheduleRoute,
+  AppSettingsRoute: AppSettingsRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
+  LoginRoute: LoginRoute,
+  RegisterRoute: RegisterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
