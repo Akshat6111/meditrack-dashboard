@@ -11,6 +11,7 @@ import {
   BarChart3,
   Users,
   HeartPulse,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +22,7 @@ const nav = [
   { to: "/schedule", label: "Schedule", icon: CalendarClock },
   { to: "/adherence-log", label: "Adherence Log", icon: ClipboardList },
   { to: "/notifications", label: "Notifications", icon: Bell },
+  { to: "/assistant", label: "AI Assistant", icon: Sparkles },
   { to: "/settings", label: "Settings", icon: Settings },
 ] as const;
 
