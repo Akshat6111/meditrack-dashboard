@@ -19,6 +19,7 @@ import { Route as AppProfileRouteImport } from './routes/_app.profile'
 import { Route as AppNotificationsRouteImport } from './routes/_app.notifications'
 import { Route as AppMedicationsRouteImport } from './routes/_app.medications'
 import { Route as AppDashboardRouteImport } from './routes/_app.dashboard'
+import { Route as AppAssistantRouteImport } from './routes/_app.assistant'
 import { Route as AppAdherenceLogRouteImport } from './routes/_app.adherence-log'
 
 const RegisterRoute = RegisterRouteImport.update({
@@ -70,6 +71,11 @@ const AppDashboardRoute = AppDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AppRoute,
 } as any)
+const AppAssistantRoute = AppAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppAdherenceLogRoute = AppAdherenceLogRouteImport.update({
   id: '/adherence-log',
   path: '/adherence-log',
@@ -81,6 +87,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/adherence-log': typeof AppAdherenceLogRoute
+  '/assistant': typeof AppAssistantRoute
   '/dashboard': typeof AppDashboardRoute
   '/medications': typeof AppMedicationsRoute
   '/notifications': typeof AppNotificationsRoute
@@ -93,6 +100,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/adherence-log': typeof AppAdherenceLogRoute
+  '/assistant': typeof AppAssistantRoute
   '/dashboard': typeof AppDashboardRoute
   '/medications': typeof AppMedicationsRoute
   '/notifications': typeof AppNotificationsRoute
@@ -107,6 +115,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/register': typeof RegisterRoute
   '/_app/adherence-log': typeof AppAdherenceLogRoute
+  '/_app/assistant': typeof AppAssistantRoute
   '/_app/dashboard': typeof AppDashboardRoute
   '/_app/medications': typeof AppMedicationsRoute
   '/_app/notifications': typeof AppNotificationsRoute
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/adherence-log'
+    | '/assistant'
     | '/dashboard'
     | '/medications'
     | '/notifications'
@@ -133,6 +143,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/adherence-log'
+    | '/assistant'
     | '/dashboard'
     | '/medications'
     | '/notifications'
@@ -146,6 +157,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/register'
     | '/_app/adherence-log'
+    | '/_app/assistant'
     | '/_app/dashboard'
     | '/_app/medications'
     | '/_app/notifications'
@@ -233,6 +245,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppDashboardRouteImport
       parentRoute: typeof AppRoute
     }
+    '/_app/assistant': {
+      id: '/_app/assistant'
+      path: '/assistant'
+      fullPath: '/assistant'
+      preLoaderRoute: typeof AppAssistantRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/_app/adherence-log': {
       id: '/_app/adherence-log'
       path: '/adherence-log'
@@ -245,6 +264,7 @@ declare module '@tanstack/react-router' {
 
 interface AppRouteChildren {
   AppAdherenceLogRoute: typeof AppAdherenceLogRoute
+  AppAssistantRoute: typeof AppAssistantRoute
   AppDashboardRoute: typeof AppDashboardRoute
   AppMedicationsRoute: typeof AppMedicationsRoute
   AppNotificationsRoute: typeof AppNotificationsRoute
@@ -255,6 +275,7 @@ interface AppRouteChildren {
 
 const AppRouteChildren: AppRouteChildren = {
   AppAdherenceLogRoute: AppAdherenceLogRoute,
+  AppAssistantRoute: AppAssistantRoute,
   AppDashboardRoute: AppDashboardRoute,
   AppMedicationsRoute: AppMedicationsRoute,
   AppNotificationsRoute: AppNotificationsRoute,
