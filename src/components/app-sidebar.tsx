@@ -11,6 +11,7 @@ import {
   BarChart3,
   Users,
   HeartPulse,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
